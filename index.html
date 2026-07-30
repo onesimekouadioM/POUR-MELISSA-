@@ -1,15 +1,70 @@
-.then(response => response.json())
-.then(result => {
-  if (result.result === "success") {
-    document.getElementById("message").innerHTML =
-      "✅ Votre demande a été envoyée avec succès !";
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prise de rendez-vous</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <h1>Prise de rendez-vous</h1>
+  <p>Réservez votre rendez-vous facilement</p>
+</header>
+
+<div class="container">
+  <form id="rdvForm">
+    <label>Nom complet</label>
+    <input type="text" id="nom" required>
+
+    <label>Numéro de téléphone</label>
+    <input type="tel" id="telephone" required>
+
+    <label>Date du rendez-vous</label>
+    <input type="date" id="date" required>
+
+    <label>Heure</label>
+    <select id="heure" required>
+      <option value="">Choisir une heure</option>
+      <option>08h00</option>
+      <option>10h00</option>
+      <option>14h00</option>
+      <option>16h00</option>
+    </select>
+
+    <button type="submit">Envoyer la demande</button>
+  </form>
+
+  <p id="message"></p>
+</div>
+
+<script>
+const scriptURL = "https://script.google.com/macros/s/AKfycbwNXI4jnBL_eJzeiO1HSFRUIhYt1UxqgEon6Y5rRMVfo1D2OmNeF3FBSp-8dFzsXKH-9w/exec";
+
+document.getElementById("rdvForm").addEventListener("submit", function(e) {
+  e.preventDefault();
+
+  const data = {
+    nom: document.getElementById("nom").value,
+    telephone: document.getElementById("telephone").value,
+    date: document.getElementById("date").value,
+    heure: document.getElementById("heure").value
+  };
+
+  fetch(scriptURL, {
+    method: "POST",
+    body: JSON.stringify(data)
+  })
+  .then(() => {
+    document.getElementById("message").innerHTML = "✅ Votre demande a été envoyée avec succès !";
     document.getElementById("rdvForm").reset();
-  } else {
-    document.getElementById("message").innerHTML =
-      "❌ " + result.message;
-  }
-})
-.catch(() => {
-  document.getElementById("message").innerHTML =
-    "❌ Impossible d'envoyer la demande.";
+  })
+  .catch(() => {
+    document.getElementById("message").innerHTML = "❌ Une erreur est survenue.";
+  });
 });
+</script>
+
+</body>
+</html>
