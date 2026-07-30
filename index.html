@@ -71,8 +71,8 @@ document.getElementById("rdvForm").addEventListener("submit", function(e) {
     "❌ Impossible d'envoyer la demande.";
   });
 });
-</script>
-    const scriptURL = "https://script.google.com/macros/s/AKfycbwNXI4jnBL_eJzeiO1HSFRUIhYt1UxqgEon6Y5rRMVfo1D2OmNeF3FBSp-8dFzsXKH-9w/exec";
+<script>
+const scriptURL = "https://script.google.com/macros/s/AKfycbwNXI4jnBL_eJzeiO1HSFRUIhYt1UxqgEon6Y5rRMVfo1D2OmNeF3FBSp-8dFzsXKH-9w/exec";
 
 document.getElementById("rdvForm").addEventListener("submit", function(e) {
   e.preventDefault();
@@ -97,8 +97,9 @@ document.getElementById("rdvForm").addEventListener("submit", function(e) {
       alert("❌ " + result.message);
     }
   })
-  .catch(() => {
+  .catch(error => {
     alert("❌ Impossible d'envoyer la demande.");
+    console.log(error);
   });
 });
 </script>
