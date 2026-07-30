@@ -1,107 +1,118 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Demande de rendez-vous</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Demande de rendez-vous</title>
+<link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
 <header>
-    <h1>Prise de rendez-vous</h1>
-    <p>Réservez votre rendez-vous facilement</p>
+<h1>Prise de rendez-vous</h1>
+<p>Réservez votre rendez-vous facilement</p>
 </header>
 
 <div class="container">
 
-    <form id="rdvForm">
-        <label>Nom complet</label>
-        <input type="text" placeholder="Votre nom">
+<form id="rdvForm">
 
-        <label>Numéro de téléphone</label>
-        <input type="tel" placeholder="Votre numéro">
+<label>Nom complet</label>
+<input type="text" id="nom" placeholder="Votre nom" required>
 
-        <label>Date du rendez-vous</label>
-        <input type="date">
+<label>Numéro de téléphone</label>
+<input type="tel" id="telephone" placeholder="Votre numéro" required>
 
-        <label>Heure</label>
-        <select>
-            <option>15h00</option>
-            <option>16h00</option>
-            <option>18h00</option>
-            <option>20h00</option>
-        </select>
-            
-        <button type="submit">Envoyer la demande</button>
-    </form>
+<label>Date du rendez-vous</label>
+<input type="date" id="date" required>
+
+<label>Heure</label>
+<select id="heure" required>
+<option>15h00</option>
+<option>16h00</option>
+<option>18h00</option>
+<option>20h00</option>
+</select>
+
+<button type="submit">Envoyer la demande</button>
+
+</form>
+
+<p id="message"></p>
 
 </div>
+
+
 <script>
+
 const scriptURL = "https://script.google.com/macros/s/AKfycbwNXI4jnBL_eJzeiO1HSFRUIhYt1UxqgEon6Y5rRMVfo1D2OmNeF3FBSp-8dFzsXKH-9w/exec";
 
-document.getElementById("rdvForm").addEventListener("submit", function(e) {
-  e.preventDefault();
 
-  const data = {
-    nom: document.getElementById("nom").value,
-    telephone: document.getElementById("telephone").value,
-    date: document.getElementById("date").value,
-    heure: document.getElementById("heure").value
-  };
+document.getElementById("rdvForm").addEventListener("submit", function(e){
 
-  fetch(scriptURL, {
-    method: "POST",
-    body: JSON.stringify(data)
-  })
-  .then(response => response.json())
-  .then(result => {
-    if (result.result === "success") {
-      document.getElementById("message").innerHTML =
-      "✅ Votre demande a été envoyée avec succès !";
-      document.getElementById("rdvForm").reset();
-    } else {
-      document.getElementById("message").innerHTML =
-      "❌ " + result.message;
-    }
-  })
-  .catch(() => {
-    document.getElementById("message").innerHTML =
-    "❌ Impossible d'envoyer la demande.";
-  });
+e.preventDefault();
+
+
+const data = {
+
+nom: document.getElementById("nom").value,
+telephone: document.getElementById("telephone").value,
+date: document.getElementById("date").value,
+heure: document.getElementById("heure").value
+
+};
+
+
+fetch(scriptURL, {
+
+method: "POST",
+body: JSON.stringify(data)
+
+})
+
+
+.then(response => response.json())
+
+.then(result => {
+
+
+if(result.result === "success"){
+
+document.getElementById("message").innerHTML =
+"✅ Votre demande a été envoyée avec succès !";
+
+document.getElementById("rdvForm").reset();
+
+
+}
+
+else {
+
+document.getElementById("message").innerHTML =
+"❌ " + result.message;
+
+}
+
+
+})
+
+
+.catch(error => {
+
+document.getElementById("message").innerHTML =
+"❌ Impossible d'envoyer la demande.";
+
+console.log(error);
+
 });
-<script>
-const scriptURL = "https://script.google.com/macros/s/AKfycbwNXI4jnBL_eJzeiO1HSFRUIhYt1UxqgEon6Y5rRMVfo1D2OmNeF3FBSp-8dFzsXKH-9w/exec";
 
-document.getElementById("rdvForm").addEventListener("submit", function(e) {
-  e.preventDefault();
 
-  const data = {
-    nom: document.getElementById("nom").value,
-    telephone: document.getElementById("telephone").value,
-    date: document.getElementById("date").value,
-    heure: document.getElementById("heure").value
-  };
-
-  fetch(scriptURL, {
-    method: "POST",
-    body: JSON.stringify(data)
-  })
-  .then(response => response.json())
-  .then(result => {
-    if (result.result === "success") {
-      alert("✅ Votre demande a été envoyée avec succès !");
-      document.getElementById("rdvForm").reset();
-    } else {
-      alert("❌ " + result.message);
-    }
-  })
-  .catch(error => {
-    alert("❌ Impossible d'envoyer la demande.");
-    console.log(error);
-  });
 });
+
 </script>
+
+
 </body>
 </html>
