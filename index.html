@@ -16,7 +16,7 @@
 
 <div class="container">
 
-    <form>
+    <form id="rdvForm">
         <label>Nom complet</label>
         <input type="text" placeholder="Votre nom">
 
@@ -38,6 +38,69 @@
     </form>
 
 </div>
+<script>
+const scriptURL = "https://script.google.com/macros/s/AKfycbwNXI4jnBL_eJzeiO1HSFRUIhYt1UxqgEon6Y5rRMVfo1D2OmNeF3FBSp-8dFzsXKH-9w/exec";
 
+document.getElementById("rdvForm").addEventListener("submit", function(e) {
+  e.preventDefault();
+
+  const data = {
+    nom: document.getElementById("nom").value,
+    telephone: document.getElementById("telephone").value,
+    date: document.getElementById("date").value,
+    heure: document.getElementById("heure").value
+  };
+
+  fetch(scriptURL, {
+    method: "POST",
+    body: JSON.stringify(data)
+  })
+  .then(response => response.json())
+  .then(result => {
+    if (result.result === "success") {
+      document.getElementById("message").innerHTML =
+      "✅ Votre demande a été envoyée avec succès !";
+      document.getElementById("rdvForm").reset();
+    } else {
+      document.getElementById("message").innerHTML =
+      "❌ " + result.message;
+    }
+  })
+  .catch(() => {
+    document.getElementById("message").innerHTML =
+    "❌ Impossible d'envoyer la demande.";
+  });
+});
+</script>
+    const scriptURL = "https://script.google.com/macros/s/AKfycbwNXI4jnBL_eJzeiO1HSFRUIhYt1UxqgEon6Y5rRMVfo1D2OmNeF3FBSp-8dFzsXKH-9w/exec";
+
+document.getElementById("rdvForm").addEventListener("submit", function(e) {
+  e.preventDefault();
+
+  const data = {
+    nom: document.getElementById("nom").value,
+    telephone: document.getElementById("telephone").value,
+    date: document.getElementById("date").value,
+    heure: document.getElementById("heure").value
+  };
+
+  fetch(scriptURL, {
+    method: "POST",
+    body: JSON.stringify(data)
+  })
+  .then(response => response.json())
+  .then(result => {
+    if (result.result === "success") {
+      alert("✅ Votre demande a été envoyée avec succès !");
+      document.getElementById("rdvForm").reset();
+    } else {
+      alert("❌ " + result.message);
+    }
+  })
+  .catch(() => {
+    alert("❌ Impossible d'envoyer la demande.");
+  });
+});
+</script>
 </body>
 </html>
