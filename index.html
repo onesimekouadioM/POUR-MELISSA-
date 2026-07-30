@@ -1,88 +1,44 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Pour Mélissa ❤️</title>
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-
-<link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demande de rendez-vous</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<div class="hearts"></div>
+<header>
+    <h1>Prise de rendez-vous</h1>
+    <p>Réservez votre rendez-vous facilement</p>
+</header>
 
 <div class="container">
 
-<div class="card active" id="page1">
+    <form>
+        <label>Nom complet</label>
+        <input type="text" placeholder="Votre nom">
 
-<h1>❤️ Coucou Mélissa ❤️</h1>
+        <label>Numéro de téléphone</label>
+        <input type="tel" placeholder="Votre numéro">
 
-<p class="typing">
-J'ai préparé une petite surprise rien que pour toi...
-</p>
+        <label>Date du rendez-vous</label>
+        <input type="date">
 
-<button onclick="nextPage(2)">
-Découvrir ❤️
-</button>
+        <label>Heure</label>
+        <select>
+            <option>08h00</option>
+            <option>10h00</option>
+            <option>14h00</option>
+            <option>16h00</option>
+        </select>
 
-</div>
-
-<div class="card" id="page2">
-
-<h2>Une première question 😊</h2>
-
-<p>
-
-Est-ce que tu accepterais qu'on se voie bientôt ?
-
-</p>
-
-<div class="buttons">
-
-<button onclick="nextPage(3)">
-Oui ❤️
-</button>
-
-<button class="secondary" onclick="noAnswer()">
-Non
-</button>
+        <button type="submit">Envoyer la demande</button>
+    </form>
 
 </div>
 
-</div>
+</body>
+</html>
 
-<div class="card" id="page3">
-
-<h2>Encore une petite question 💖</h2>
-
-<p>
-
-Penses-tu que je suis quelqu'un que tu aimerais avoir dans ta vie... comme chéri ?
-
-</p>
-
-<div class="buttons">
-
-<button onclick="nextPage(4)">
-Oui 🥰
-</button>
-
-<button class="secondary" onclick="nextPage(4)">
-J'aimerais apprendre à mieux te connaître 😊
-</button>
-
-</div>
-
-</div>
-
-<div class="card" id="page4">
-
-<div class="emoji">
-🎉💕🎉
-</div>
